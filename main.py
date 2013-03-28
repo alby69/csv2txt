@@ -22,9 +22,9 @@ def read_ini(file_ini, section_name=''):
         if parser.has_section(section_name):
             for name in parser.options(section_name):
                 diz_ini[name.upper()] = parser.get(section_name, name)
-        else:
-            for s in sections_ini:
-                diz_ini[s] = read_ini(file_ini, s) # crea un diz con chiavi le sezioni
+    else:
+        for s in sections_ini:
+            diz_ini[s] = read_ini(file_ini, s) # crea un diz con chiavi le sezioni
 
     return diz_ini
 
@@ -160,7 +160,7 @@ if __name__ == '__main__':
   
     diz_ini = read_ini('setup.ini') 
     path = os.path.abspath(os.path.dirname(__file__)) # valore assoluto del path 
-  
+    print diz_ini
     # Carico dati dal file setup.ini
     file_tracciato = diz_ini['SETUP']['FILE_TRACCIATO']
     file_log = diz_ini['SETUP']['FILE_LOG']
