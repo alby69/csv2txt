@@ -117,17 +117,17 @@ def crea_mess(tracciato, sep='', visualizza=False):
             intero, decimale=f[1:-1].split('.')
             len_campo = int(intero) + 1 + int(decimale)
             tmp = str2num(tracciato[d])
-            if tmp == '': tmp = 0    
+            if tmp == '': tmp=0    
         elif (tipo == 's'):
             tmp = tracciato[d]
         elif tipo == 'd':
             tmp = str2num(tracciato[d])
             if tmp == '':
-                tmp = 0
+                tmp=0
             else:
                 tmp = int(tmp)
         else:
-            'errore formato: el[' + i + '] f =' + tipo
+            'errore formato: el[' + i + '] f=' + tipo
 
         if len_campo == 0:
             len_campo = int(f[1:-1])

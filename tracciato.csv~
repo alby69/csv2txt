@@ -1,0 +1,6 @@
+id	nome	lunghezza	tipo	valore
+1	Nome	20	string	Alberto
+2	Cognome	20	string	Abate
+3	Linguaggio preferito	10	string	python
+4	peso	2	integer	73
+5	importo	10:2	float	2500.3
