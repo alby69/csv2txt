@@ -86,6 +86,35 @@ def csv_read(path, filename, sep='\t'):
     return nomi, diz_curr
 
 
+def csv_edit(diz_list, key='id', key_value='001', diz_values=None):
+	# edit diz csv
+	for diz in diz_list:
+		if diz.has_key(key):
+			if diz[key] == key_value:
+				if diz_values == None:
+					return diz
+				else:
+					for v in diz_values.keys():
+						diz[v]=diz_values[v]
+	return diz_list			
+
+
+def csv_writer(path, filename, fieldnames, rows, sep='\t'):
+	
+	f_output = open(path+filename,'wb')
+	csvwriter = csv.DictWriter(f_output, delimiter=sep, fieldnames=fieldnames)
+	
+	# Creo l'header con fieldnames e lo scrivo nel file
+	diz_header = {}
+	for e in fieldnames:
+		diz_header[e] = e
+	csvwriter.writerow(diz_header)
+
+	for row in rows:
+		csvwriter.writerow(row)
+	f_output.close
+
+
 def multikeysort(items, columns):
     from operator import itemgetter
     comparers = [ ((itemgetter(col[1:].strip()), -1) 
