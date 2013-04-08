@@ -73,6 +73,7 @@ if __name__ == '__main__':
             file_tracciato = args[0]
             file_ris = args[1]
         if len(args) == 1:
+            # se non passo il secondo parametro lo imposto file_ris = file_tracciato.txt
             file_tracciato = args[0]
             nome_file,est_file = args[0].split('.')
             est_file = 'txt'
