@@ -77,13 +77,13 @@ def csv_read(path, filename, sep='\t'):
     csvreader = csv.DictReader(f_input, delimiter=sep)
     nomi = csvreader.fieldnames
     #nomi.sort()		
-    diz_curr = []
+    list_rows = []
 		
     for row in csvreader:
-        diz_curr.append(row)
+        list_rows.append(row)
 		
     nomi.sort()
-    return nomi, diz_curr
+    return nomi, list_rows
 
 
 def csv_edit(diz_list, key='id', key_value='001', diz_values=None):

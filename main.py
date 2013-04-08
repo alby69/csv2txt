@@ -35,13 +35,14 @@ if __name__ == '__main__':
         print 'ELENCO COMANDI'
         print '(p): visualizza tracciato'
         print '(c): converti tracciato'
+        print '(e): modifica tracciato'
         print '(l): visualizza questo menu'
 
     if results.stampa:
         args = results.stampa        
         if len(args) == 1:
             file_tracciato = args[0]
-            etichette, diz_tracciato = csv_read(path + os.sep, file_tracciato)
+            etichette, diz_tracciato = csv_read(path + os.sep, file_tracciato, sep_campo)
             list_tracciato = multikeysort(diz_tracciato, [id_campo])
             table = []
             table.append(etichette)
@@ -58,7 +59,7 @@ if __name__ == '__main__':
             file_tracciato = args[0]
             file_ris = args[1]
             f_out = open(path + os.sep + file_ris, 'w')
-            etichette, diz_tracciato = csv_read(path + os.sep, file_tracciato)
+            etichette, diz_tracciato = csv_read(path + os.sep, file_tracciato, sep_campo)
             list_tracciato = multikeysort(diz_tracciato, [id_campo])
             tracciato = leggi_tracciato(list_tracciato, id_campo, tipo_campo, len_campo, valore_campo)
             riga = crea_mess(tracciato, sep_campo, False)
@@ -68,11 +69,13 @@ if __name__ == '__main__':
         
     if results.edit:
         args = results.edit
-        if len(args) == 3:
+        if len(args) == 4:
             file_tracciato = args[0]
             key_value = args[1]
-            diz_values= args[2]
-            etichette, diz_tracciato = csv_read(path + os.sep, file_tracciato)
+            field_name = args[2]
+            field_value = args[3]
+            diz_values= {field_name:field_value}
+            etichette, diz_tracciato = csv_read(path + os.sep, file_tracciato, sep_campo)
             rows = csv_edit(diz_tracciato, id_campo, key_value, diz_values)
             csv_writer(path+os.sep, file_tracciato, etichette, rows, sep_campo)
             print 'File '+ file_tracciato + 'modificato..' 
