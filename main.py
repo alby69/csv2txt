@@ -30,13 +30,25 @@ if __name__ == '__main__':
     len_campo = diz_ini['SETUP']['LUNGHEZZA_CAMPO']
     tipo_campo = diz_ini['SETUP']['TIPO_CAMPO']
     valore_campo = diz_ini['SETUP']['VALORE_CAMPO']
+    txt_p_command = '(p): show tracciato' + os.linesep + 'params: file_tracciato'
+    txt_c_command = '(c): convert tracciato' + os.linesep + 'params: file_tracciato, file_ris'
+    txt_e_command = '(e): edit tracciato' + os.linesep + 'params: file_tracciato, key_value, field_name, field_value'
 
     if results.elenco:
-        print 'ELENCO COMANDI'
-        print '(p): visualizza tracciato'
-        print '(c): converti tracciato'
-        print '(e): modifica tracciato'
-        print '(l): visualizza questo menu'
+	print '*****	MAIN MENU 	*****'
+	print
+	print 'name:	CSV2TXT'
+	print 'author:	Alberto Abate'
+	print 'email:	alberto.abate@gmail.com'
+	print
+	print 'COMMANDS LIST'      
+    print txt_p_command
+    print
+    print txt_c_command
+    print
+    print txt_e_command
+    print
+    print '(l): this menu'
 
     if results.stampa:
         args = results.stampa        
@@ -52,6 +64,8 @@ if __name__ == '__main__':
                     tmp_list.append(d[e])
                 table.append(tmp_list)
             pprintTable(table)
+        else:
+            print txt_p_command
 
     if results.converti:
         args = results.converti
@@ -66,7 +80,9 @@ if __name__ == '__main__':
 
             f_out.write(riga + os.linesep)
             f_out.close
-        
+        else:
+            print txt_c_command
+
     if results.edit:
         args = results.edit
         if len(args) == 4:
@@ -78,7 +94,10 @@ if __name__ == '__main__':
             etichette, diz_tracciato = csv_read(path + os.sep, file_tracciato, sep_campo)
             rows = csv_edit(diz_tracciato, id_campo, key_value, diz_values)
             csv_writer(path+os.sep, file_tracciato, etichette, rows, sep_campo)
-            print 'File '+ file_tracciato + 'modificato..' 
+            print 'File '+ file_tracciato + 'modificato..'
+        else:
+            print txt_e_command
+ 
 
     
 
