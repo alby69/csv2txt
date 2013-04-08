@@ -131,10 +131,10 @@ def multikeysort(items, columns):
     return sorted(items, cmp=comparer)
 
 
-def leggi_tracciato(list_tracciato, campo_progr, campo_tipo, campo_lunghezza, campo_valore):
+def leggi_tracciato(list_tracciato, campo_progr, campo_tipo, campo_lunghezza, campo_valore, campo_allinea):
     tracciato = {}
     for l in list_tracciato:
-        formato = crea_formato(l[campo_tipo], l[campo_lunghezza], '0', '', 'r')
+        formato = crea_formato(l[campo_tipo], l[campo_lunghezza], '0', '', l[campo_allinea])
         tracciato[l[campo_progr] + ':' + formato] = l[campo_valore]
 
     return tracciato
@@ -147,8 +147,7 @@ def crea_formato(f_type, f_len, pad_num='0', pad_str='', f_align='r'):
     f_dec: numero cifre decimali
     f_align: r=right, l=left
     """
-
-    if f_align == 'r': align = ''
+    if f_align == 'r' or f_align == '': align = ''
     if f_align == 'l': align = '-'
 
     if f_type == 'integer':
