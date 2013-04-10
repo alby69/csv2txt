@@ -4,16 +4,17 @@
 import argparse
 
 from funzioni import *
+from editor_csv import *
 
 
 
 if __name__ == '__main__':
 
-
     parser = argparse.ArgumentParser(description='Conversione tracciato')
     parser.add_argument('-l',action='store_true',dest='elenco',help='Elenco Comandi')
     parser.add_argument('-c',dest='converti',nargs='+', help='Converti Tracciato')
-    parser.add_argument('-e',dest='edit',nargs='+', help='Modifica Tracciato')
+    #parser.add_argument('-e',dest='edit',nargs='+', help='Modifica Tracciato')
+    parser.add_argument('-e',action='store_true',dest='edit',help='Modifica Tracciato')
     parser.add_argument('-p',dest='stampa',nargs='+', help='Stampa Tracciato')
 
     results = parser.parse_args()
@@ -91,7 +92,10 @@ if __name__ == '__main__':
 
     if results.edit:
         args = results.edit
-        if len(args) == 4:
+        root = Tk()    
+        app = Application(root,'CSV2TXT',id_campo,sep_campo)
+        root.mainloop()
+        """if len(args) == 4:
             file_tracciato = args[0]
             key_value = args[1]
             field_name = args[2]
@@ -101,6 +105,6 @@ if __name__ == '__main__':
             rows = csv_edit(diz_tracciato, id_campo, key_value, diz_values)
             csv_writer(path+os.sep, file_tracciato, etichette, rows, sep_campo)
             print 'File '+ file_tracciato.upper() + 'modificato..' 
-
+        """
     
 

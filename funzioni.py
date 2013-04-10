@@ -145,6 +145,8 @@ def crea_formato(f_type, f_len, pad_num='0', pad_str='', f_align='r'):
     f_type: integer, float, string
     f_len: lunghezza totale campo es. decimale 10:2 lunghezza 10 di cui 2 decimali
     f_dec: numero cifre decimali
+    pad_num: carattere riempimento campo numerico
+    pad_str: carattere riempimento campo testo
     f_align: r=right, l=left
     """
     if f_align == 'r' or f_align == '': align = ''
