@@ -1,6 +1,6 @@
-id|lunghezza|nome|tipo|valore
-001|20|Nome|string|Alberto
-002|20|Cognome|string|Mele
-003|10|Linguaggio preferito|string|python
-004|2|peso|integer|75
-005|10:2|importo|float|2500.3
+allineamento|id|lunghezza|nome|tipo|valore
+l|001|20|Nome|string|Alberto
+l|002|20|Cognome|string|Abate
+l|003|10|Linguaggio preferito|string|python
+r|004|3|peso|integer|75
+r|005|10:2|importo|float|2500.3

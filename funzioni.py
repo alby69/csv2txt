@@ -131,11 +131,21 @@ def multikeysort(items, columns):
     return sorted(items, cmp=comparer)
 
 
-def leggi_tracciato(list_tracciato, campo_progr, campo_tipo, campo_lunghezza, campo_valore, campo_allinea):
+def leggi_tracciato(list_tracciato, diz_ini):
+
+    sep_campo = diz_ini['SETUP']['SEP_CAMPO']
+    id_campo = diz_ini['SETUP']['PROGRESSIVO_CAMPO']
+    len_campo = diz_ini['SETUP']['LUNGHEZZA_CAMPO']
+    tipo_campo = diz_ini['SETUP']['TIPO_CAMPO']
+    valore_campo = diz_ini['SETUP']['VALORE_CAMPO']
+    allinea_campo = diz_ini['SETUP']['ALLINEA_CAMPO']
+    pad_num = diz_ini['SETUP']['PAD_NUM']
+    pad_str = diz_ini['SETUP']['PAD_STR']
+
     tracciato = {}
     for l in list_tracciato:
-        formato = crea_formato(l[campo_tipo], l[campo_lunghezza], '0', '', l[campo_allinea])
-        tracciato[l[campo_progr] + ':' + formato] = l[campo_valore]
+        formato = crea_formato(l[tipo_campo], l[len_campo], pad_num, pad_str, l[allinea_campo])
+        tracciato[l[id_campo] + ':' + formato] = l[valore_campo]
 
     return tracciato
 

@@ -35,43 +35,30 @@ class Application:
         csv_writer(path+os.sep, self.tabella+'.csv', self.nomi, self.diz_tracciato, sel.sep_campo)
         print 'Registrazione effettuata...'
 
-        
-
 
     def muovi(self,direzione):
         
-        if self.diz_curr == {}:
-            rec = 1
-        else:
-            rec = int(self.diz_curr[self.id_campo])
-
-        self.curr_rec = 0
-        
-        if direzione == "inizio": self.curr_rec = 1
+        tmp_curr_rec = self.curr_rec
+      
+        if direzione == "inizio": self.curr_rec = 0
         if direzione == "fine":   self.curr_rec = self.nrec       
             
         if direzione == "prec":
-          if ((rec-self.step) >= 1):
-            self.curr_rec = rec-self.step  
+          if ((self.curr_rec - self.step) >= 0):
+            self.curr_rec = self.curr_rec - self.step  
 
         if direzione == "succ":
-          if ((rec+self.step) <= self.nrec):
-            self.curr_rec = rec+self.step  
+          if ((self.curr_rec + self.step) <= self.nrec):
+            self.curr_rec = self.curr_rec + self.step  
 
-        if self.curr_rec <> 0:
-            tmp_list = []
-            tmp_diz = self.leggi_maschera()
-            for d in self.diz_tracciato:
-                if d[self.id_campo] == '%03d' % rec:
-                    if tmp_diz <> {}:
-                        d = tmp_diz
-                if d[self.id_campo] == '%03d' % self.curr_rec:
-                    self.diz_curr = d
-                tmp_list.append(d)
+        tmp_diz = self.leggi_maschera()
+        if tmp_diz <> {}:
+            self.diz_tracciato[tmp_curr_rec] = tmp_diz #salvo il record della maschera
 
-            self.diz_tracciato = tmp_list
-            self.riempi_maschera(self.diz_curr)
-                  
+        self.diz_curr = self.diz_tracciato[self.curr_rec] #prelevo il nuovo record
+
+        self.riempi_maschera(self.diz_curr) # visualizzo il nuovo record
+
             
     def leggi_maschera(self):
         tmp_diz = {}
@@ -110,9 +97,7 @@ class Application:
         risp = tkMessageBox.askyesno("ATTENZIONE", "Elimino record?")
         if risp == True:
           res = db.delete(path+self.tabella+".tbl",['recno'],[self.curr_rec])
-          #res = db.pack(path+self.tabella+".tbl")
           self.nrec = db.len(path+self.tabella+".tbl")
-          #self.svuota_maschera()
           self.muovi("succ")
 
       #if value == "esci":  self.active_wnd.destroy()
@@ -157,7 +142,7 @@ class Application:
         self.tabella = nome_tab
         self.nomi, list_tracciato = csv_read(path+os.sep, nome_tab+'.csv', self.sep_campo)
         self.diz_tracciato = multikeysort(list_tracciato, [self.id_campo])  
-        self.nrec = len(self.diz_tracciato)
+        self.nrec = len(self.diz_tracciato)-1
   
         cboCombo = []
         varCombo_lst = []

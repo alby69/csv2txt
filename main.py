@@ -23,15 +23,8 @@ if __name__ == '__main__':
     diz_ini = read_ini('setup.ini') 
     path = os.path.abspath(os.path.dirname(__file__)) # valore assoluto del path 
     
-    # Carico dati dal file setup.ini
-    #file_tracciato = diz_ini['SETUP']['FILE_TRACCIATO']
-    #file_log = diz_ini['SETUP']['FILE_LOG']
     sep_campo = diz_ini['SETUP']['SEP_CAMPO']
     id_campo = diz_ini['SETUP']['PROGRESSIVO_CAMPO']
-    len_campo = diz_ini['SETUP']['LUNGHEZZA_CAMPO']
-    tipo_campo = diz_ini['SETUP']['TIPO_CAMPO']
-    valore_campo = diz_ini['SETUP']['VALORE_CAMPO']
-    allinea_campo = diz_ini['SETUP']['ALLINEA_CAMPO']
 
     txt_p_command = '(p): show tracciato' + os.linesep + 'params: file_tracciato'
     txt_c_command = '(c): convert tracciato' + os.linesep + 'params: file_tracciato, file_ris'
@@ -83,7 +76,7 @@ if __name__ == '__main__':
         f_out = open(path + os.sep + file_ris, 'w')
         etichette, diz_tracciato = csv_read(path + os.sep, file_tracciato, sep_campo)
         list_tracciato = multikeysort(diz_tracciato, [id_campo])
-        tracciato = leggi_tracciato(list_tracciato, id_campo, tipo_campo, len_campo, valore_campo, allinea_campo)
+        tracciato = leggi_tracciato(list_tracciato, diz_ini)
         riga = crea_mess(tracciato, sep_campo, False)
 
         f_out.write(riga + os.linesep)
